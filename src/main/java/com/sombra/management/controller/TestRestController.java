@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestRestController {
 
 
-    @GetMapping
+    @GetMapping(value = "/health")
     public String health() {
         log.info("healthy");
         return "healthy";
+    }
+
+    @GetMapping(value = "/health/v2")
+    public String health2() {
+        log.info("healthy");
+        return "healthy-2";
     }
 
 
