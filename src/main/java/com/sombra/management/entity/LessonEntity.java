@@ -2,11 +2,9 @@ package com.sombra.management.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -14,7 +12,7 @@ import java.util.Set;
 @Table(name = "lessons")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lesson {
+public class LessonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +24,12 @@ public class Lesson {
 
     @ManyToOne
     @JoinColumn(name="course_id", nullable=false)
-    private Course course;
+    private CourseEntity course;
 
     @OneToMany(mappedBy="lesson")
-    private Set<Homework> homeworks;
+    private Set<HomeworkEntity> homeworks;
 
     @OneToMany(mappedBy="lesson")
-    private Set<Mark> marks;
-
-
+    private Set<MarkEntity> marks;
 
 }

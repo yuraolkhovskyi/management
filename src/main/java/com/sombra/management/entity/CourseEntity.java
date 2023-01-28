@@ -2,7 +2,6 @@ package com.sombra.management.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,7 @@ import java.util.Set;
 @Table(name = "courses")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
+public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,17 +31,17 @@ public class Course {
 
     @ManyToMany
     @JoinTable(
-            name = "user_course",
+            name = "person_course",
             joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    private Set<User> users;
+    private Set<UserEntity> users;
 
     @OneToMany(mappedBy="course")
-    private Set<CourseGraduation> courseGraduations;
+    private Set<CourseGraduationEntity> courseGraduations;
 
     @OneToMany(mappedBy="course")
-    private Set<Lesson> lessons;
+    private Set<LessonEntity> lessons;
 
 
 }

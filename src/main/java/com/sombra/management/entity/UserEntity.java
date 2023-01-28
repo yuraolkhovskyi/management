@@ -4,10 +4,10 @@ import com.sombra.management.entity.converter.UserRoleConverter;
 import com.sombra.management.entity.enumeration.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,21 +28,31 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role")
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
     @ManyToMany(mappedBy = "users")
-    private Set<Course> courses;
+    private Set<CourseEntity> courses;
 
     @OneToMany(mappedBy="student")
-    private Set<CourseGraduation> studentCourseGraduations;
-
-    @OneToMany(mappedBy="instructor")
-    private Set<CourseGraduation> instructorCourseGraduations;
+    private Set<CourseGraduationEntity> studentCourseGraduations;
 
     @OneToMany(mappedBy="user")
-    private Set<Mark> marks;
+    private Set<HomeworkEntity> homeworks;
+
+    @OneToMany(mappedBy="instructor")
+    private Set<CourseFeedbackEntity> courseFeedbacks;
+
 
 }
