@@ -1,5 +1,6 @@
 package com.sombra.management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class CourseEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "person_course",
@@ -37,9 +39,11 @@ public class CourseEntity {
     )
     private Set<UserEntity> users;
 
+    @JsonIgnore
     @OneToMany(mappedBy="course")
     private Set<CourseGraduationEntity> courseGraduations;
 
+    @JsonIgnore
     @OneToMany(mappedBy="course")
     private Set<LessonEntity> lessons;
 

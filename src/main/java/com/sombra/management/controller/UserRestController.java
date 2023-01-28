@@ -14,10 +14,5 @@ public class UserRestController {
 
     private final UserService userService;
 
-    // FIXME: 28.01.2023 restrict access for INSTRUCTOR only
-    @GetMapping(value = "/courses/{instructorId}")
-    public ResponseEntity<Set<Object>> getCoursesByInstructorId(@PathVariable final Long instructorId) {
-        return ResponseEntity.ok().body(userService.getCoursesByInstructorId(instructorId));
-    }
 
 }

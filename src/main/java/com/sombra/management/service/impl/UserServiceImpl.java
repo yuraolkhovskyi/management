@@ -15,9 +15,4 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-    @Override
-    public Set<Object> getCoursesByInstructorId(final Long instructorId) {
-        return null;
-    }
-
 }

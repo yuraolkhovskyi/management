@@ -9,12 +9,12 @@ VALUES
 
 INSERT INTO courses (id, end_date, start_date, title)
 VALUES
-    (1, '2023-04-01', '2023-06-01', 'Computer Science Basics'),
-    (2, '2023-05-01', '2023-07-01', 'Design Patterns'),
-    (3, '2023-06-01', '2023-08-01', 'DB'),
-    (4, '2023-07-01', '2023-09-01', 'CyberSecurity'),
-    (5, '2023-08-01', '2023-10-01', 'Computer Networks'),
-    (6, '2023-09-01', '2023-11-01', 'Algorithms');
+    (1, '2023-06-01', '2023-04-01', 'Computer Science Basics'),
+    (2, '2023-07-01', '2023-05-01', 'Design Patterns'),
+    (3, '2023-08-01', '2023-06-01', 'DB'),
+    (4, '2023-09-01', '2023-07-01', 'CyberSecurity'),
+    (5, '2023-10-01', '2023-08-01', 'Computer Networks'),
+    (6, '2023-11-01', '2023-09-01', 'Algorithms');
 
 INSERT INTO person_course (course_id, person_id)
 VALUES
