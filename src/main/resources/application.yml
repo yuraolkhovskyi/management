@@ -9,3 +9,12 @@ spring:
       hibernate:
         format_sql: true
     database: postgresql
+user:
+  max-number-of-courses: 5
+
+course:
+  min-number-of-lessons: 5
+
+#logging:
+#  level:
+#    root: debug

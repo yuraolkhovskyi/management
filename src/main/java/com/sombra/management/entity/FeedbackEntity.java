@@ -4,15 +4,17 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
-@Table(name = "course_feedbacks")
+@Table(name = "feedbacks")
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseFeedbackEntity {
+public class FeedbackEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

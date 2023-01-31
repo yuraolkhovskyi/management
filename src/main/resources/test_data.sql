@@ -37,7 +37,7 @@ VALUES
     (3, 57, 1, 3, 1),
     (4, 39, 1, 3, 4);
 
-INSERT INTO course_feedbacks (id, date, feedback_message, course_graduation_id, instructor_id)
+INSERT INTO feedbacks (id, date, feedback_message, course_graduation_id, instructor_id)
 VALUES
     (1, '2023-05-02', 'Feedback message 1', 1, 2),
     (2, '2023-06-02', 'Feedback message 2', 2, 5),

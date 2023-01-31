@@ -37,6 +37,7 @@ public class UserEntity {
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
 
+//    [SECURITY] There are three roles: admin, instructor, student;
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role")
     @Convert(converter = UserRoleConverter.class)
@@ -52,7 +53,7 @@ public class UserEntity {
     private Set<HomeworkEntity> homeworks;
 
     @OneToMany(mappedBy="instructor")
-    private Set<CourseFeedbackEntity> courseFeedbacks;
+    private Set<FeedbackEntity> courseFeedbacks;
 
 
 }
