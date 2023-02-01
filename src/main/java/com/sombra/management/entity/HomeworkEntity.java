@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "homeworks")
 @AllArgsConstructor
@@ -19,11 +21,8 @@ public class HomeworkEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "file_homework")
-    private String fileHomework; // FIXME: 18.01.2023 change to File type
-
-    @Column(name = "date")
-    private LocalDateTime date;
+    @Column(name = "upload_date")
+    private LocalDateTime uploadDate;
 
     @ManyToOne
     @JoinColumn(name="lesson_id", nullable=false)
@@ -32,6 +31,11 @@ public class HomeworkEntity {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+//    @MapsId best practice
+    @JoinColumn(name = "file_id")
+    private FileEntity file;
 
 
 }

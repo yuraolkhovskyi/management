@@ -27,5 +27,10 @@ public class LessonServiceImpl implements LessonService {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public LessonEntity findLessonEntityById(final Long lessonId) {
+        return lessonRepository.findById(lessonId).orElseThrow();
+    }
+
 
 }
