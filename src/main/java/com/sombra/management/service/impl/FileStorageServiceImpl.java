@@ -1,8 +1,9 @@
-package com.sombra.management.service;
+package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.FileResDTO;
 import com.sombra.management.entity.FileEntity;
 import com.sombra.management.repository.FileRepository;
+import com.sombra.management.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
