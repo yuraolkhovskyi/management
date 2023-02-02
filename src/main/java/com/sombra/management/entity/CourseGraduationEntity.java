@@ -6,11 +6,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "course_graduations")
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class CourseGraduationEntity {
     private Long id;
 
     @Column(name = "final_mark")
-    private BigDecimal finalMark;
+    private Integer finalMark;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")

@@ -30,7 +30,7 @@ public class HomeworkEntity {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
-    private UserEntity user;
+    private UserEntity student;
 
     @OneToOne(fetch = FetchType.LAZY)
 //    @MapsId best practice

@@ -3,6 +3,7 @@ package com.sombra.management.service;
 import com.sombra.management.dto.CourseDTO;
 import com.sombra.management.dto.CourseResDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
+import com.sombra.management.entity.CourseEntity;
 
 import java.util.Set;
 
@@ -15,4 +16,6 @@ public interface CourseService {
     RegisterUserToCourseDTO registerUserToCourse(final RegisterUserToCourseDTO userToCourseDTO);
 
     CourseDTO findById(final Long courseId);
+
+    CourseEntity findCourseEntityById(final Long courseId);
 }

@@ -49,7 +49,7 @@ public class UserEntity {
     @OneToMany(mappedBy="student")
     private Set<CourseGraduationEntity> studentCourseGraduations;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="student")
     private Set<HomeworkEntity> homeworks;
 
     @OneToMany(mappedBy="instructor")

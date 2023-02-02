@@ -32,10 +32,10 @@ VALUES
 
 INSERT INTO course_graduations (id, final_mark, status, course_id, student_id)
 VALUES
-    (1, 84, 0, 1, 1),
-    (2, 43, 0, 2, 4),
-    (3, 57, 1, 3, 1),
-    (4, 39, 1, 3, 4);
+    (1, 4, 0, 1, 1),
+    (2, 3, 1, 2, 4),
+    (3, 5, 0, 3, 1),
+    (4, 4, 0, 3, 4);
 
 INSERT INTO feedbacks (id, date, feedback_message, course_graduation_id, instructor_id)
 VALUES

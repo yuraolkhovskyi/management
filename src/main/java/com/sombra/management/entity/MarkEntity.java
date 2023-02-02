@@ -33,7 +33,7 @@ public class MarkEntity {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
-    private UserEntity user;
+    private UserEntity student;
 
     @ManyToOne
     @JoinColumn(name="instructor_id", nullable=false)

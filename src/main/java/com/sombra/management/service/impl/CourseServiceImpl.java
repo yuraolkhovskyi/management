@@ -55,6 +55,11 @@ public class CourseServiceImpl implements CourseService {
         return modelMapper.map(courseEntity, CourseDTO.class);
     }
 
+    @Override
+    public CourseEntity findCourseEntityById(final Long courseId) {
+        return courseRepository.findById(courseId).orElseThrow();
+    }
+
 
     @Override
     public CourseDTO addNewCourse(final CourseDTO courseDto) {

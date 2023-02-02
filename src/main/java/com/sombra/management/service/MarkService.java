@@ -1,11 +1,11 @@
 package com.sombra.management.service;
 
 import com.sombra.management.dto.MarkDTO;
-import com.sombra.management.dto.UserCourseDTO;
+import com.sombra.management.dto.StudentCourseDTO;
 
 public interface MarkService {
 
     MarkDTO putMarkByLesson(final MarkDTO markDTO);
 
-    Integer calculateFinalMarkByUserAndCourse(final UserCourseDTO userCourseDTO);
+    Double calculateFinalMarkByStudentAndCourse(final StudentCourseDTO userCourseDTO);
 }

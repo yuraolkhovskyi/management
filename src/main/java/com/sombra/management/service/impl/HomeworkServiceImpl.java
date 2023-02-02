@@ -40,7 +40,7 @@ public class HomeworkServiceImpl implements HomeworkService {
 
         homeworkEntity.setUploadDate(LocalDateTime.now());
         homeworkEntity.setFile(fileEntity);
-        homeworkEntity.setUser(userEntity);
+        homeworkEntity.setStudent(userEntity);
         homeworkEntity.setLesson(lessonEntity);
 
         HomeworkEntity homework = homeworkRepository.save(homeworkEntity);
