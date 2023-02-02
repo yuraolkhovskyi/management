@@ -50,6 +50,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public CourseDTO findById(final Long courseId) {
+        final CourseEntity courseEntity = courseRepository.findById(courseId).orElseThrow();
+        return modelMapper.map(courseEntity, CourseDTO.class);
+    }
+
+
+    @Override
     public CourseDTO addNewCourse(final CourseDTO courseDto) {
         final Set<LessonDTO> lessons = courseDto.getLessons();
 

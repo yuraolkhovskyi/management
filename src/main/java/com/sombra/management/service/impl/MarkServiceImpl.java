@@ -1,10 +1,11 @@
 package com.sombra.management.service.impl;
 
-import com.sombra.management.dto.MarkDTO;
+import com.sombra.management.dto.*;
 import com.sombra.management.entity.LessonEntity;
 import com.sombra.management.entity.MarkEntity;
 import com.sombra.management.entity.UserEntity;
 import com.sombra.management.repository.MarkRepository;
+import com.sombra.management.service.CourseService;
 import com.sombra.management.service.LessonService;
 import com.sombra.management.service.MarkService;
 import com.sombra.management.service.UserService;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -22,6 +24,7 @@ public class MarkServiceImpl implements MarkService {
     private final MarkRepository markRepository;
     private final UserService userService;
     private final LessonService lessonService;
+    private final CourseService courseService;
 
     @Override
     public MarkDTO putMarkByLesson(final MarkDTO markDTO) {
@@ -40,6 +43,21 @@ public class MarkServiceImpl implements MarkService {
         markRepository.save(markEntity);
 
         return markDTO;
+    }
+
+    @Override
+    public Integer calculateFinalMarkByUserAndCourse(final UserCourseDTO userCourseDTO) {
+
+        final Set<LessonDTO> lessons = courseService.findById(userCourseDTO.getCourseId()).getLessons();
+
+        List<Integer> marks = new ArrayList<>();
+        for (final LessonDTO lesson : lessons) {
+            final Set<MarkEntity> marksByUserAndLessonIds = markRepository // student can get multiple marks per lesson
+                    .findAllByUserIdAndLessonId(userCourseDTO.getUserId(), lesson.getId());
+            marksByUserAndLessonIds.stream().map(MarkEntity::getMark).forEach(marks::add);
+        }
+
+        return marks.stream().mapToInt(Integer::intValue).sum() / marks.size();
     }
 
 
