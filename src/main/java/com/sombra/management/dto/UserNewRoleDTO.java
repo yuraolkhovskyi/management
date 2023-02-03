@@ -1,5 +1,6 @@
 package com.sombra.management.dto;
 
+import com.sombra.management.entity.enumeration.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StudentCourseDTO {
+public class UserNewRoleDTO {
 
-    private Long studentId;
-    private Long courseId;
+    private Long userId;
+    private UserRole role;
 
 }

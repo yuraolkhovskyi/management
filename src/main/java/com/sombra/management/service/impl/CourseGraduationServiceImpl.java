@@ -1,7 +1,7 @@
 package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.CourseGraduationDTO;
-import com.sombra.management.dto.StudentCourseDTO;
+import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.entity.CourseEntity;
 import com.sombra.management.entity.CourseGraduationEntity;
 import com.sombra.management.entity.UserEntity;
@@ -40,18 +40,18 @@ public class CourseGraduationServiceImpl implements CourseGraduationService {
     }
 
     @Override
-    public CourseGraduationDTO graduateCourse(final StudentCourseDTO studentCourseDTO) {
+    public CourseGraduationDTO graduateCourse(final UserCourseDTO userCourseDTO) {
 
         final CourseGraduationEntity courseGraduationEntity = new CourseGraduationEntity();
 
         final Integer finalMarkPerUserCourse = (int) Math.round(markService
-                .calculateFinalMarkByStudentAndCourse(studentCourseDTO));
+                .calculateFinalMarkByStudentAndCourse(userCourseDTO));
         courseGraduationEntity.setFinalMark(finalMarkPerUserCourse);
 
-        final UserEntity student = userService.findUserEntityByUserId(studentCourseDTO.getStudentId());
+        final UserEntity student = userService.findUserEntityByUserId(userCourseDTO.getUserId());
         courseGraduationEntity.setStudent(student);
 
-        final CourseEntity course = courseService.findCourseEntityById(studentCourseDTO.getCourseId());
+        final CourseEntity course = courseService.findCourseEntityById(userCourseDTO.getCourseId());
         courseGraduationEntity.setCourse(course);
         courseGraduationEntity.setStatus(calculateGraduateCourseStatusByFinalMark(finalMarkPerUserCourse));
 

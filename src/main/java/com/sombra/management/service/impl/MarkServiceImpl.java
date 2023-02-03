@@ -46,15 +46,15 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
-    public Double calculateFinalMarkByStudentAndCourse(final StudentCourseDTO userCourseDTO) {
+    public Double calculateFinalMarkByStudentAndCourse(final UserCourseDTO userCourseDTO) {
 
         final Set<LessonDTO> lessons = courseService.findById(userCourseDTO.getCourseId()).getLessons();
 
         List<Integer> marks = new ArrayList<>();
         for (final LessonDTO lesson : lessons) {
-            final Set<MarkEntity> marksByUserAndLessonIds = markRepository // student can get multiple marks per lesson
-                    .findAllByStudentIdAndLessonId(userCourseDTO.getStudentId(), lesson.getId());
-            marksByUserAndLessonIds.stream().map(MarkEntity::getMark).forEach(marks::add);
+            final Set<MarkEntity> marksByStudentAndLessonIds = markRepository // student can get multiple marks per lesson
+                    .findAllByStudentIdAndLessonId(userCourseDTO.getUserId(), lesson.getId());
+            marksByStudentAndLessonIds.stream().map(MarkEntity::getMark).forEach(marks::add);
         }
 
         return marks.stream().mapToDouble(a -> a).sum() / marks.size();

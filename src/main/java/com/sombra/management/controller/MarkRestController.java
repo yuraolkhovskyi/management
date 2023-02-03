@@ -1,7 +1,7 @@
 package com.sombra.management.controller;
 
 import com.sombra.management.dto.MarkDTO;
-import com.sombra.management.dto.StudentCourseDTO;
+import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.service.MarkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class MarkRestController {
 
 //    [BUSINESS] The final mark for course is average by lessons;
     @PostMapping(value = "/calculate")
-    public ResponseEntity<Double> calculateFinalMark(@RequestBody final StudentCourseDTO userCourseDTO) {
+    public ResponseEntity<Double> calculateFinalMark(@RequestBody final UserCourseDTO userCourseDTO) {
         return ResponseEntity.ok().body(markService.calculateFinalMarkByStudentAndCourse(userCourseDTO));
     }
 

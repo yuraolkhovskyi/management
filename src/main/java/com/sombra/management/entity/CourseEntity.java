@@ -39,7 +39,7 @@ public class CourseEntity {
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    private Set<UserEntity> users;
+    private Set<UserEntity> people;
 
     @JsonIgnore
     @OneToMany(mappedBy="course")

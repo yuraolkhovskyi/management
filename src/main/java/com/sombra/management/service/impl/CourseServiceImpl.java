@@ -4,6 +4,7 @@ import com.sombra.management.dto.CourseDTO;
 import com.sombra.management.dto.CourseResDTO;
 import com.sombra.management.dto.LessonDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
+import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.entity.CourseEntity;
 import com.sombra.management.entity.UserEntity;
 import com.sombra.management.repository.CourseRepository;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Objects;
 import java.util.Set;
@@ -60,6 +62,25 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findById(courseId).orElseThrow();
     }
 
+    @Override
+    public UserCourseDTO assignInstructorToCourse(final UserCourseDTO userCourseDTO) {
+        final CourseEntity courseEntity = findCourseEntityById(userCourseDTO.getCourseId());
+        final Set<UserEntity> instructors = userService.findUserEntityByUserIds(Set.of(userCourseDTO.getUserId()));
+
+        final Set<UserEntity> coursePeople = courseEntity.getPeople();
+
+        if (CollectionUtils.isEmpty(coursePeople)) {
+            courseEntity.setPeople(instructors);
+        } else {
+            courseEntity.getPeople().addAll(instructors);
+        }
+
+        courseRepository.save(courseEntity);
+
+
+        return userCourseDTO;
+    }
+
 
     @Override
     public CourseDTO addNewCourse(final CourseDTO courseDto) {
@@ -77,12 +98,12 @@ public class CourseServiceImpl implements CourseService {
 
         final Set<UserEntity> instructors = userService.findUserEntityByUserIds(instructorIds);
 
-        final Set<UserEntity> users = courseEntity.getUsers();
+        final Set<UserEntity> users = courseEntity.getPeople();
 
         if (Objects.isNull(users)) {
-            courseEntity.setUsers(instructors);
+            courseEntity.setPeople(instructors);
         } else {
-            courseEntity.getUsers().addAll(instructors);
+            courseEntity.getPeople().addAll(instructors);
         }
 
         courseRepository.save(courseEntity);
@@ -116,7 +137,7 @@ public class CourseServiceImpl implements CourseService {
 
         final CourseEntity courseEntity = courseRepository.findById(courseId).orElseThrow();
         final UserEntity userEntityByUserId = userService.findUserEntityByUserId(userId);
-        courseEntity.getUsers().add(userEntityByUserId);
+        courseEntity.getPeople().add(userEntityByUserId);
 
         courseRepository.save(courseEntity);
 

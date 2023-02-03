@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -43,7 +45,7 @@ public class UserEntity {
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "people")
     private Set<CourseEntity> courses;
 
     @OneToMany(mappedBy="student")

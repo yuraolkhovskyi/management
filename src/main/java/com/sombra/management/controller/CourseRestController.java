@@ -3,6 +3,7 @@ package com.sombra.management.controller;
 import com.sombra.management.dto.CourseDTO;
 import com.sombra.management.dto.CourseResDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
+import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,12 @@ public class CourseRestController {
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createNewCourse(@RequestBody final CourseDTO courseDTO) {
         return ResponseEntity.ok().body(courseService.addNewCourse(courseDTO));
+    }
+
+//    [BUSINESS] Admin should be able to assign instructor for the course;
+    @PostMapping(value = "/assign/instructor")
+    public ResponseEntity<UserCourseDTO> assignInstructorToCourse(@RequestBody final UserCourseDTO userCourseDTO) {
+        return ResponseEntity.ok().body(courseService.assignInstructorToCourse(userCourseDTO));
     }
 
 }

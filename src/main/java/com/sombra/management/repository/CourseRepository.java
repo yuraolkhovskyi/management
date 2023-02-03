@@ -11,7 +11,7 @@ import java.util.Set;
 @Repository
 public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
 
-    @Query(value = "select ce from CourseEntity ce " + "JOIN ce.users uss WHERE uss.id = :userId")
+    @Query(value = "select ce from CourseEntity ce " + "JOIN ce.people uss WHERE uss.id = :userId")
     Set<CourseEntity> getCourseEntitiesByUserId(@RequestParam Long userId);
 
 }

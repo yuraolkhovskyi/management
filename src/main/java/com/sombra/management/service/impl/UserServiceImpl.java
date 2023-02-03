@@ -1,12 +1,11 @@
 package com.sombra.management.service.impl;
 
-import com.sombra.management.dto.UserDTO;
+import com.sombra.management.dto.UserNewRoleDTO;
 import com.sombra.management.entity.UserEntity;
 import com.sombra.management.repository.UserRepository;
 import com.sombra.management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -36,5 +35,13 @@ public class UserServiceImpl implements UserService {
             result.add(userEntity);
         }
         return result;
+    }
+
+    @Override
+    public UserNewRoleDTO assignNewRoleForUser(final UserNewRoleDTO userNewRoleDTO) {
+        final UserEntity userEntity = findUserEntityByUserId(userNewRoleDTO.getUserId());
+        userEntity.setRole(userNewRoleDTO.getRole());
+        userRepository.save(userEntity);
+        return userNewRoleDTO;
     }
 }
