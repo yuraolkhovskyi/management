@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/v1/auth/**"
+                        "/api/auth/**"
                 ).permitAll()
                 .requestMatchers(
                         "/api/course/user/**",

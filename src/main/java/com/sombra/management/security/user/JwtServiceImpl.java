@@ -28,8 +28,8 @@ public class JwtServiceImpl implements JwtService {
     private int NUMBER_OF_DAYS_FOR_TOKEN_TO_EXPIRE;
 
     @Override
-    public String extractUsername(final String jwt) {
-        return extractClaim(jwt, Claims::getSubject);
+    public String extractUsername(final String jwtToken) {
+        return extractClaim(jwtToken, Claims::getSubject);
     }
 
     public <T> T extractClaim(final String jwtToken,
@@ -49,7 +49,9 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private boolean isTokenExpired(final String jwtToken) {
-        return extractExpiration(jwtToken).before(new Date());
+        final Date expirationDate = extractExpiration(jwtToken);
+        final Date currentDate = new Date();
+        return expirationDate.before(currentDate) || expirationDate.equals(currentDate);
     }
 
     private Date extractExpiration(final String jwtToken) {
