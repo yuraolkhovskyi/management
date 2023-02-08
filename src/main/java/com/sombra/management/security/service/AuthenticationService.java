@@ -1,4 +1,4 @@
-package com.sombra.management.security;
+package com.sombra.management.security.service;
 
 import com.sombra.management.security.dto.AuthenticationRequest;
 import com.sombra.management.security.dto.AuthenticationResponse;

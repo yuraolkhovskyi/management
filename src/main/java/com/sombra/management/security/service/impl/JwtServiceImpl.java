@@ -1,5 +1,6 @@
-package com.sombra.management.security.user;
+package com.sombra.management.security.service.impl;
 
+import com.sombra.management.security.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

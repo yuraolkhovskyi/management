@@ -1,4 +1,4 @@
-package com.sombra.management.security.user;
+package com.sombra.management.security.service;
 
 
 import org.springframework.security.core.userdetails.UserDetails;

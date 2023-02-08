@@ -1,6 +1,6 @@
 package com.sombra.management.security.config;
 
-import com.sombra.management.security.user.UserSecurityRepository;
+import com.sombra.management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class ApplicationConfig {
 
-    private final UserSecurityRepository userSecurityRepository;
+    private final UserRepository userSecurityRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {

@@ -1,6 +1,6 @@
 package com.sombra.management.security.config;
 
-import com.sombra.management.security.user.JwtService;
+import com.sombra.management.security.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

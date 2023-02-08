@@ -1,12 +1,13 @@
-package com.sombra.management.security;
+package com.sombra.management.security.service.impl;
 
+import com.sombra.management.entity.UserEntity;
 import com.sombra.management.entity.enumeration.UserRole;
+import com.sombra.management.repository.UserRepository;
+import com.sombra.management.security.service.AuthenticationService;
 import com.sombra.management.security.dto.AuthenticationRequest;
 import com.sombra.management.security.dto.AuthenticationResponse;
 import com.sombra.management.security.dto.RegisterRequest;
-import com.sombra.management.security.user.JwtService;
-import com.sombra.management.security.user.UserSecurityEntity;
-import com.sombra.management.security.user.UserSecurityRepository;
+import com.sombra.management.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +18,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final UserSecurityRepository userSecurityRepository;
+    private final UserRepository userSecurityRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override
     public AuthenticationResponse register(final RegisterRequest request) {
-        final UserSecurityEntity userSecurityEntity = UserSecurityEntity.builder()
+        final UserEntity userSecurityEntity = UserEntity.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
@@ -45,7 +46,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         authenticationRequest.getPassword()
                 )
         );
-        UserSecurityEntity userSecurityEntity = userSecurityRepository
+        UserEntity userSecurityEntity = userSecurityRepository
                 .findByEmail(authenticationRequest.getEmail())
                 .orElseThrow();
         final String token = jwtService.generateToken(userSecurityEntity);

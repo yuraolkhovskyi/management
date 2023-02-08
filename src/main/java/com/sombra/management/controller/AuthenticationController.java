@@ -1,8 +1,9 @@
-package com.sombra.management.security;
+package com.sombra.management.controller;
 
 import com.sombra.management.security.dto.AuthenticationRequest;
 import com.sombra.management.security.dto.AuthenticationResponse;
 import com.sombra.management.security.dto.RegisterRequest;
+import com.sombra.management.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

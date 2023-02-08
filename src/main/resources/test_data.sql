@@ -1,11 +1,11 @@
-INSERT INTO users (id, email, first_name, last_name, password, registration_date, role)
+INSERT INTO users (id, email, firstname, lastname, password, registration_date, role)
 VALUES
-    (1, 'user1@gmail.com', 'user1FName', 'user1LName', 'pass', '2022-01-01', 0),
-    (2, 'instructor2@gmail.com', 'user2FName', 'user2LName', 'pass', '2022-01-01', 1),
-    (3, 'admin3@gmail.com', 'user3FName', 'user3LName', 'pass', '2022-01-01', 2),
-    (4, 'user4@gmail.com', 'user4FName', 'user4LName', 'pass', '2022-01-01', 0),
-    (5, 'instructor5@gmail.com', 'user5FName', 'user5LName', 'pass', '2022-01-01', 1),
-    (6, 'admin6@gmail.com', 'user6FName', 'user6LName', 'pass', '2022-01-01', 2);
+    (1, 'yurii1@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 0),
+    (2, 'yurii2@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 1),
+    (3, 'yurii3@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 2),
+    (4, 'yurii4@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 0),
+    (5, 'yurii5@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 1),
+    (6, 'yurii6@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', '2023-01-01', 2);
 
 INSERT INTO courses (id, end_date, start_date, title)
 VALUES
@@ -100,11 +100,5 @@ VALUES
     (2, '2023-05-06', 3, 5, 2, 4),
     (3, '2023-05-08', 5, 2, 3, 1),
     (4, '2023-05-10', 4, 5, 4, 4);
-
-INSERT INTO user_security (id, email, firstname, lastname, password, role)
-VALUES
-    (1, 'yurii1@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 0),
-    (2, 'yurii2@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 1),
-    (3, 'yurii3@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 2)
 
 
