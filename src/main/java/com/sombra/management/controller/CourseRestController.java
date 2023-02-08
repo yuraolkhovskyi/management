@@ -18,29 +18,27 @@ public class CourseRestController {
 
     private final CourseService courseService;
 
-    // FIXME: 28.01.2023 restrict access for INSTRUCTOR & STUDENT
-//    [BUSINESS] The instructor should be able to see list of his courses;
-//    [BUSINESS] The student should be able to see his courses;
+//    [BUSINESS] The instructor should be able to see list of his courses; | ADMIN, INSTRUCTOR, STUDENT
+//    [BUSINESS] The student should be able to see his courses; (security in service)
     @GetMapping(value = "/user/{userId}/courses")
     public ResponseEntity<Set<CourseResDTO>> getCoursesByUserId(@PathVariable final Long userId) {
         return ResponseEntity.ok().body(courseService.getCoursesByUserId(userId));
     }
 
-    // FIXME: 31.01.2023 USER access
-//    [BUSINESS] Student can take up to 5 courses at the same time;
+//    [BUSINESS] Student can take up to 5 courses at the same time; | ADMIN / USER
     @PostMapping(value = "/register/user")
     public ResponseEntity<RegisterUserToCourseDTO> registerUserToCourse(@RequestBody final RegisterUserToCourseDTO userToCourseDTO) {
         return ResponseEntity.ok().body(courseService.registerUserToCourse(userToCourseDTO));
     }
 
-//    [BUSINESS] Each course should have at least one instructor;
+//    [BUSINESS] Each course should have at least one instructor; | ADMIN / INSTRUCTOR
 //    [BUSINESS] Each course contains at least 5 lessons;
     @PostMapping(value = "/create")
     public ResponseEntity<CourseDTO> createNewCourse(@RequestBody final CourseDTO courseDTO) {
         return ResponseEntity.ok().body(courseService.addNewCourse(courseDTO));
     }
 
-//    [BUSINESS] Admin should be able to assign instructor for the course;
+//    [BUSINESS] Admin should be able to assign instructor for the course; | ADMIN
     @PostMapping(value = "/assign/instructor")
     public ResponseEntity<UserCourseDTO> assignInstructorToCourse(@RequestBody final UserCourseDTO userCourseDTO) {
         return ResponseEntity.ok().body(courseService.assignInstructorToCourse(userCourseDTO));

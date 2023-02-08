@@ -3,7 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/yuriiolkhovskiy
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
@@ -14,6 +14,12 @@ user:
 
 course:
   min-number-of-lessons: 5
+
+
+jwt:
+  secret-key: 703273357638792F423F4528482B4D6251655468576D597133743677397A24432646294A404E635266556A586E327234753778214125442A472D4B6150645367
+  days-to-expire: 7
+
 
 #logging:
 #  level:

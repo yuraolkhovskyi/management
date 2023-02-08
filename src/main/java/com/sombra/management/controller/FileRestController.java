@@ -20,11 +20,13 @@ public class FileRestController {
 
     private final FileStorageService fileStorageService;
 
+//    [BUSINESS] The student should be able to upload a text file with homework; | ADMIN / STUDENT
     @PostMapping(value = "/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         return ResponseEntity.ok().body(fileStorageService.storeFile(multipartFile));
     }
 
+//     | ADMIN / STUDENT
     @GetMapping(value = "/download/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable final String fileId) {
         final FileResDTO fileResDTO = fileStorageService.downloadFile(fileId);
