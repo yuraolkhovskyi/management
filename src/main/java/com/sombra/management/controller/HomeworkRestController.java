@@ -16,8 +16,9 @@ public class HomeworkRestController {
 
     private final HomeworkService homeworkService;
 
+//    [BUSINESS] The student should be able to upload a text file with homework;
     @PostMapping(value = "/lesson/{lessonId}/user/{userId}")
-    public ResponseEntity<HomeworkResDTO> getLessonsByCourseId(
+    public ResponseEntity<HomeworkResDTO> uploadHomework(
             @PathVariable final Long lessonId,
             @PathVariable final Long userId,
             @RequestParam("file") final MultipartFile homeworkFile) throws IOException {

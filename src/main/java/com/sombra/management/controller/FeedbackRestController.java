@@ -13,8 +13,7 @@ public class FeedbackRestController {
 
     private final FeedbackService feedbackService;
 
-    // FIXME: 30.01.2023 limit access to INSTRUCTOR
-//    [BUSINESS] The instructor should be able to give student final feedback for the course;
+//    [BUSINESS] The instructor should be able to give student final feedback for the course;| ADMIN / INSTRUCTOR
     @PostMapping
     public ResponseEntity<StudentFeedbackDTO> addStudentFeedbackForCourseGraduation(
             @RequestBody final StudentFeedbackDTO studentFeedbackDTO) {

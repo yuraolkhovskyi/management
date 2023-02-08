@@ -13,6 +13,7 @@ public class UserRestController {
 
     private final UserService userService;
 
+    //[SECURITY] Admin should be able to assign a role for a new user;
     @PostMapping(value = "/assign/role")
     public ResponseEntity<UserNewRoleDTO> assignNewRoleForUser(@RequestBody final UserNewRoleDTO userNewRoleDTO) {
         return ResponseEntity.ok().body(userService.assignNewRoleForUser(userNewRoleDTO));

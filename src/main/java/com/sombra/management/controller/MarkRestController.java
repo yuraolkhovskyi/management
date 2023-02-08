@@ -14,13 +14,13 @@ public class MarkRestController {
 
     private final MarkService markService;
 
-//    [BUSINESS] The instructor should be able to put a mark for a student for each lesson;
+//    [BUSINESS] The instructor should be able to put a mark for a student for each lesson; | ADMIN INSTRUCTOR
     @PostMapping
     public ResponseEntity<MarkDTO> putMarkForLesson(@RequestBody final MarkDTO markDTO) {
         return ResponseEntity.ok().body(markService.putMarkByLesson(markDTO));
     }
 
-//    [BUSINESS] The final mark for course is average by lessons;
+//    [BUSINESS] The final mark for course is average by lessons; | ADMIN INSTRUCTOR STUDENT
     @PostMapping(value = "/calculate")
     public ResponseEntity<Double> calculateFinalMark(@RequestBody final UserCourseDTO userCourseDTO) {
         return ResponseEntity.ok().body(markService.calculateFinalMarkByStudentAndCourse(userCourseDTO));

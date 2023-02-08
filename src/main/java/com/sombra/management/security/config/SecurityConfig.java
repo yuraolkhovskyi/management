@@ -25,9 +25,29 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
-                .permitAll()
-                .requestMatchers("/api/course/**").hasAuthority(UserRole.INSTRUCTOR.name())
+                .requestMatchers(
+                        "/api/v1/auth/**"
+                ).permitAll()
+                .requestMatchers(
+                        "/api/course/user/**",
+                        "/api/file/**",
+                        "/api/mark/calculate",
+                        "/api/homework/**"
+                ).hasAnyAuthority(UserRole.ADMIN.name(), UserRole.INSTRUCTOR.name(), UserRole.STUDENT.name())
+                .requestMatchers(
+                        "/api/course/create",
+                        "/api/mark",
+                        "/api/feedback/**"
+                ).hasAnyAuthority(UserRole.ADMIN.name(), UserRole.INSTRUCTOR.name())
+                .requestMatchers(
+                        "/api/course-graduation/**",
+                        "/api/lesson/**",
+                        "/api/course/register/**"
+                ).hasAnyAuthority(UserRole.ADMIN.name(), UserRole.STUDENT.name())
+                .requestMatchers(
+                        "/api/user/**",
+                        "/api/course/assign/**"
+                ).hasAnyAuthority(UserRole.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()

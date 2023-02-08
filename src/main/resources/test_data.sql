@@ -101,5 +101,10 @@ VALUES
     (3, '2023-05-08', 5, 2, 3, 1),
     (4, '2023-05-10', 4, 5, 4, 4);
 
+INSERT INTO user_security (id, email, firstname, lastname, password, role)
+VALUES
+    (1, 'yurii1@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 0),
+    (2, 'yurii2@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 1),
+    (3, 'yurii3@gmail.com', 'yurii', 'yurii', '$2a$10$t5Oe5eckAVHwQlmO7F4ypO2fkhAJjM.E49/eFIVoW0k/fN69TUiR2', 2)
 
 
