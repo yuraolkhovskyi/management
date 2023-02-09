@@ -2,6 +2,7 @@ package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.FileResDTO;
 import com.sombra.management.entity.FileEntity;
+import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.FileRepository;
 import com.sombra.management.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Objects;
+
+import static com.sombra.management.exception.ErrorMessageConstants.BAD_REQUEST_ERROR_MESSAGE;
+import static com.sombra.management.exception.code.ServiceErrorCode.BAD_REQUEST;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -34,7 +38,11 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     @Override
     public FileResDTO downloadFile(final String fileId) {
-        final FileEntity fileEntity = fileRepository.findById(fileId).orElseThrow();
+        final FileEntity fileEntity = fileRepository.findById(fileId)
+                .orElseThrow(() -> {
+                    log.error("File with id {} doesn't exist", fileId);
+                    throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
+                });
         return modelMapper.map(fileEntity, FileResDTO.class);
     }
 

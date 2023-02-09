@@ -3,7 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/yuriiolkhovskiy
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:

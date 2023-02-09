@@ -6,6 +6,7 @@ import com.sombra.management.entity.CourseEntity;
 import com.sombra.management.entity.CourseGraduationEntity;
 import com.sombra.management.entity.UserEntity;
 import com.sombra.management.entity.enumeration.CourseGraduationStatus;
+import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.CourseGraduationRepository;
 import com.sombra.management.service.CourseGraduationService;
 import com.sombra.management.service.CourseService;
@@ -15,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import static com.sombra.management.exception.ErrorMessageConstants.BAD_REQUEST_ERROR_MESSAGE;
+import static com.sombra.management.exception.code.ServiceErrorCode.BAD_REQUEST;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,7 +39,8 @@ public class CourseGraduationServiceImpl implements CourseGraduationService {
     public CourseGraduationEntity getCourseGraduationById(final Long courseGraduationId) {
         return courseGraduationRepository.findById(courseGraduationId)
                 .orElseThrow(() -> {
-                    throw new RuntimeException(String.format("Course Graduation with id {%d} doesn't exist", courseGraduationId));
+                    log.error("Course Graduation with id {%d} doesn't exist");
+                    throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
                 });
     }
 

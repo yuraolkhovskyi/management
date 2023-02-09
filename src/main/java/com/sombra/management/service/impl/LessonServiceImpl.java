@@ -2,6 +2,7 @@ package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.LessonDTO;
 import com.sombra.management.entity.LessonEntity;
+import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.LessonRepository;
 import com.sombra.management.service.LessonService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.sombra.management.exception.ErrorMessageConstants.BAD_REQUEST_ERROR_MESSAGE;
+import static com.sombra.management.exception.code.ServiceErrorCode.BAD_REQUEST;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -29,7 +33,11 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public LessonEntity findLessonEntityById(final Long lessonId) {
-        return lessonRepository.findById(lessonId).orElseThrow();
+        return lessonRepository.findById(lessonId)
+                .orElseThrow(() -> {
+                    log.error("No lesson entity found by id {}", lessonId);
+                    throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
+                });
     }
 
 

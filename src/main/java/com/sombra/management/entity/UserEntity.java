@@ -1,5 +1,6 @@
 package com.sombra.management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sombra.management.entity.converter.UserRoleConverter;
 import com.sombra.management.entity.enumeration.UserRole;
 import jakarta.persistence.*;
@@ -44,15 +45,19 @@ public class UserEntity implements UserDetails {
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "people")
     private Set<CourseEntity> courses;
 
+    @JsonIgnore
     @OneToMany(mappedBy="student")
     private Set<CourseGraduationEntity> studentCourseGraduations;
 
+    @JsonIgnore
     @OneToMany(mappedBy="student")
     private Set<HomeworkEntity> homeworks;
 
+    @JsonIgnore
     @OneToMany(mappedBy="instructor")
     private Set<FeedbackEntity> courseFeedbacks;
 

@@ -2,6 +2,7 @@ package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.UserNewRoleDTO;
 import com.sombra.management.entity.UserEntity;
+import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.UserRepository;
 import com.sombra.management.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.sombra.management.exception.ErrorMessageConstants.BAD_REQUEST_ERROR_MESSAGE;
+import static com.sombra.management.exception.code.ServiceErrorCode.BAD_REQUEST;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,7 +27,8 @@ public class UserServiceImpl implements UserService {
     public UserEntity findUserEntityByUserId(final Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> {
-                    throw new RuntimeException(String.format("User with id {%d} doesn't exist", userId));
+                    log.error("User with id {} doesn't exist", userId);
+                    throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
                 });
     }
 
