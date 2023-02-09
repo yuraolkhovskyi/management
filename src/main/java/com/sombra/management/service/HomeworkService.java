@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public interface HomeworkService {
 
-    HomeworkResDTO uploadHomework(final MultipartFile homeworkFile, final Long lessonId, final Long userId) throws IOException;
+    HomeworkResDTO uploadHomework(final MultipartFile homeworkFile,
+                                  final Long lessonId,
+                                  final Long userId) throws IOException;
 
 }

@@ -12,5 +12,5 @@ public interface FileStorageService {
 
     FileEntity save(final MultipartFile homeworkFile) throws IOException;
 
-    FileResDTO downloadFile(String fileId);
+    FileResDTO downloadFile(final String fileId);
 }

@@ -26,7 +26,7 @@ public enum CourseGraduationStatus {
 
     public static CourseGraduationStatus getByCode(final int dbCode) {
         return Arrays.stream(CourseGraduationStatus.values())
-                .filter(e -> e.getDbCode() == dbCode)
+                .filter(status -> status.getDbCode() == dbCode)
                 .findFirst()
                 .orElseThrow(() -> {
                     log.error("No Course Graduation Status found by db code {}", dbCode);

@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/health")
 public class TestRestController {
-
 
     @GetMapping
     public String health() {
-        log.info("healthy");
+        log.info("The application is healthy");
         return "healthy";
     }
 

@@ -13,7 +13,6 @@ public class CourseGraduationRestController {
 
     private final CourseGraduationService courseGraduationService;
 
-
 //    [BUSINESS] To pass the course student should get a minimum of 80% for final grade;
     @PostMapping(value = "/graduate")
     public ResponseEntity<CourseGraduationDTO> graduateCourse(@RequestBody final UserCourseDTO userCourseDTO) {

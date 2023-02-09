@@ -30,9 +30,10 @@ public class FileRestController {
     @GetMapping(value = "/download/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable final String fileId) {
         final FileResDTO fileResDTO = fileStorageService.downloadFile(fileId);
+        final String contentDispositionHeaderValue = "attachment; filename=\"" + fileResDTO.getFileName();
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileResDTO.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileResDTO.getFileName())
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDispositionHeaderValue)
                 .body(new ByteArrayResource(fileResDTO.getFile()));
     }
 

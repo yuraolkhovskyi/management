@@ -89,8 +89,6 @@ public class CourseServiceImpl implements CourseService {
         }
 
         courseRepository.save(courseEntity);
-
-
         return userCourseDTO;
     }
 
@@ -109,32 +107,29 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO addNewCourse(final CourseDTO courseDto) {
         final Set<LessonDTO> lessons = courseDto.getLessons();
-
         if (Objects.isNull(lessons) || lessons.isEmpty() || lessons.size() < MIN_NUMBER_OF_LESSONS) {
             log.error("Invalid lessons data");
             throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
         }
-        final CourseEntity courseEntity = modelMapper.map(courseDto, CourseEntity.class);
-        Set<Long> instructorIds = courseDto.getInstructorIds();
 
+        final Set<Long> instructorIds = courseDto.getInstructorIds();
         if (Objects.isNull(instructorIds) || instructorIds.isEmpty()) {
             log.error("Course cannot be created without any instructor assigned.");
             throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
 
         }
 
+        final CourseEntity courseEntity = modelMapper.map(courseDto, CourseEntity.class);
         final Set<UserEntity> instructors = userService.findUserEntityByUserIds(instructorIds);
+        final Set<UserEntity> people = courseEntity.getPeople();
 
-        final Set<UserEntity> users = courseEntity.getPeople();
-
-        if (Objects.isNull(users)) {
+        if (Objects.isNull(people)) {
             courseEntity.setPeople(instructors);
         } else {
             courseEntity.getPeople().addAll(instructors);
         }
 
         courseRepository.save(courseEntity);
-
         return courseDto;
     }
 

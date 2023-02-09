@@ -27,7 +27,7 @@ public enum UserRole {
 
     public static UserRole getByCode(final int dbCode) {
         return Arrays.stream(UserRole.values())
-                .filter(e -> e.getDbCode() == dbCode)
+                .filter(role -> role.getDbCode() == dbCode)
                 .findFirst()
                 .orElseThrow(() -> {
                     log.error("No User Role found by db code {}", dbCode);
