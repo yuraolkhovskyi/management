@@ -1,5 +1,6 @@
 package com.sombra.management.service;
 
+import com.sombra.management.dto.UserDTO;
 import com.sombra.management.dto.UserNewRoleDTO;
 import com.sombra.management.entity.UserEntity;
 
@@ -12,4 +13,6 @@ public interface UserService {
     Set<UserEntity> findUserEntityByUserIds(final Set<Long> userIds);
 
     UserNewRoleDTO assignNewRoleForUser(UserNewRoleDTO userNewRoleDTO);
+
+    Set<UserDTO> findUserDtosByUserIds(final Set<Long> userIds);
 }

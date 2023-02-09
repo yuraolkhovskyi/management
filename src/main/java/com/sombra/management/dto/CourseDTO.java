@@ -17,5 +17,6 @@ public class CourseDTO {
     private LocalDate endDate;
     private Set<Long> instructorIds;
     private Set<LessonDTO> lessons;
+    private Set<UserDTO> people;
 
 }

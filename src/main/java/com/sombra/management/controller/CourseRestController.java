@@ -2,6 +2,7 @@ package com.sombra.management.controller;
 
 import com.sombra.management.dto.CourseDTO;
 import com.sombra.management.dto.CourseResDTO;
+import com.sombra.management.dto.UserDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
 import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.service.CourseService;
@@ -25,7 +26,13 @@ public class CourseRestController {
         return ResponseEntity.ok().body(courseService.getCoursesByUserId(userId));
     }
 
-//    [BUSINESS] Student can take up to 5 courses at the same time; | ADMIN / USER
+//    [BUSINESS] The instructor should be able to see list of students per course;
+    @GetMapping(value = "/{courseId}/students")
+    public ResponseEntity<Set<UserDTO>> getStudentsPerCourse(@PathVariable final Long courseId) {
+        return ResponseEntity.ok().body(courseService.getStudentsByCourseId(courseId));
+    }
+
+    //    [BUSINESS] Student can take up to 5 courses at the same time; | ADMIN / USER
     @PostMapping(value = "/register/user")
     public ResponseEntity<RegisterUserToCourseDTO> registerUserToCourse(@RequestBody final RegisterUserToCourseDTO userToCourseDTO) {
         return ResponseEntity.ok().body(courseService.registerUserToCourse(userToCourseDTO));

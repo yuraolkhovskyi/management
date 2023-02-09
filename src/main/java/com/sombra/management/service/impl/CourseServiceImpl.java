@@ -1,6 +1,7 @@
 package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.CourseDTO;
+import com.sombra.management.dto.UserDTO;
 import com.sombra.management.dto.CourseResDTO;
 import com.sombra.management.dto.LessonDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
@@ -91,6 +92,17 @@ public class CourseServiceImpl implements CourseService {
 
 
         return userCourseDTO;
+    }
+
+    @Override
+    public Set<UserDTO> getStudentsByCourseId(final Long courseId) {
+        final CourseDTO courseDTO = findById(courseId);
+
+        final Set<Long> studentIds = courseDTO.getPeople().stream()
+                .filter(e -> e.getRole() == UserRole.STUDENT)
+                .map(UserDTO::getId)
+                .collect(Collectors.toSet());
+        return userService.findUserDtosByUserIds(studentIds);
     }
 
 

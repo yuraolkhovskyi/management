@@ -36,6 +36,7 @@ public class SecurityConfig {
                 ).hasAnyAuthority(UserRole.ADMIN.name(), UserRole.INSTRUCTOR.name(), UserRole.STUDENT.name())
                 .requestMatchers(
                         "/api/course/create",
+                        "/api/course/*/students",
                         "/api/mark",
                         "/api/feedback/**"
                 ).hasAnyAuthority(UserRole.ADMIN.name(), UserRole.INSTRUCTOR.name())

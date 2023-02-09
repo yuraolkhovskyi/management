@@ -2,6 +2,7 @@ package com.sombra.management.service;
 
 import com.sombra.management.dto.CourseDTO;
 import com.sombra.management.dto.CourseResDTO;
+import com.sombra.management.dto.UserDTO;
 import com.sombra.management.dto.RegisterUserToCourseDTO;
 import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.entity.CourseEntity;
@@ -21,4 +22,6 @@ public interface CourseService {
     CourseEntity findCourseEntityById(final Long courseId);
 
     UserCourseDTO assignInstructorToCourse(final UserCourseDTO userCourseDTO);
+
+    Set<UserDTO> getStudentsByCourseId(final Long courseId);
 }
