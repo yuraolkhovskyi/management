@@ -39,14 +39,19 @@ public class CourseGraduationServiceImpl implements CourseGraduationService {
     public CourseGraduationEntity getCourseGraduationById(final Long courseGraduationId) {
         return courseGraduationRepository.findById(courseGraduationId)
                 .orElseThrow(() -> {
-                    log.error("Course Graduation with id {%d} doesn't exist");
+                    log.error("Course Graduation with id {} doesn't exist", courseGraduationId);
                     throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
                 });
     }
 
     @Override
     public CourseGraduationDTO graduateCourse(final UserCourseDTO userCourseDTO) {
+        final CourseGraduationEntity courseGraduationEntity = getCourseGraduationEntity(userCourseDTO);
+        final CourseGraduationEntity saved = courseGraduationRepository.save(courseGraduationEntity);
+        return modelMapper.map(saved, CourseGraduationDTO.class);
+    }
 
+    private CourseGraduationEntity getCourseGraduationEntity(final UserCourseDTO userCourseDTO) {
         final CourseGraduationEntity courseGraduationEntity = new CourseGraduationEntity();
 
         final Integer finalMarkPerUserCourse = (int) Math.round(markService
@@ -59,13 +64,10 @@ public class CourseGraduationServiceImpl implements CourseGraduationService {
         final CourseEntity course = courseService.findCourseEntityById(userCourseDTO.getCourseId());
         courseGraduationEntity.setCourse(course);
         courseGraduationEntity.setStatus(calculateGraduateCourseStatusByFinalMark(finalMarkPerUserCourse));
-
-        final CourseGraduationEntity saved = courseGraduationRepository.save(courseGraduationEntity);
-
-        return modelMapper.map(saved, CourseGraduationDTO.class);
+        return courseGraduationEntity;
     }
 
-    private CourseGraduationStatus calculateGraduateCourseStatusByFinalMark(final Integer finalMarkPerUserCourse) {
+    CourseGraduationStatus calculateGraduateCourseStatusByFinalMark(final Integer finalMarkPerUserCourse) {
         final int finalGradePercentage = finalMarkPerUserCourse * 100 / MAX_MARK_PER_LESSON;
         return finalGradePercentage >= PERCENTAGE_TO_PASS_THE_COURSE
                 ? CourseGraduationStatus.PASSED
