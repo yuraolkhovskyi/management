@@ -54,10 +54,6 @@ class CourseGraduationServiceImplTest {
                 markService, userService, courseService, modelMapper);
     }
 
-    @AfterEach
-    void tearDown() throws Exception {
-    }
-
     @Test
     void getCourseGraduationById_test1() {
         //given
