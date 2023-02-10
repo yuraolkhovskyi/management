@@ -9,6 +9,6 @@ import java.util.Set;
 @Repository
 public interface MarkRepository extends JpaRepository<MarkEntity, Long> {
 
-    Set<MarkEntity> findAllByStudentIdAndLessonId(final Long userId, final Long lessonId);
+    Set<MarkEntity> findAllByStudentIdAndLessonId(final Long studentId, final Long lessonId);
 
 }
