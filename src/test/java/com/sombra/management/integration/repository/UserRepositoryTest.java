@@ -1,6 +1,7 @@
-package com.sombra.management.repository;
+package com.sombra.management.integration.repository;
 
 import com.sombra.management.entity.UserEntity;
+import com.sombra.management.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

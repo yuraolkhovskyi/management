@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<UserEntity> findUserEntityByUserIds(final Set<Long> userIds) {
+    public Set<UserEntity> findUserEntitiesByUserIds(final Set<Long> userIds) {
         return userIds.stream()
                 .map(this::findUserEntityByUserId)
                 .collect(Collectors.toSet());
@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
                 .map(this::findUserEntityByUserId)
                 .map(e -> modelMapper.map(e, UserDTO.class))
                 .collect(Collectors.toSet());
-
     }
 
     @Override

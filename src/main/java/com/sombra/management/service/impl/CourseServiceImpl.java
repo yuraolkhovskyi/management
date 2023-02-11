@@ -16,6 +16,7 @@ import com.sombra.management.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -51,7 +52,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Set<CourseResDTO> getCoursesByUserId(final Long userId) {
-        final UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SecurityContext context = SecurityContextHolder.getContext();
+        final UserEntity user = (UserEntity) context.getAuthentication().getPrincipal();
         if (user.getRole() != UserRole.ADMIN && !Objects.equals(user.getId(), userId)) {
             throw new SystemException(ACCESS_DENIED_ERROR_MESSAGE, ACCESS_DENIED);
         }
@@ -78,7 +80,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public UserCourseDTO assignInstructorToCourse(final UserCourseDTO userCourseDTO) {
         final CourseEntity courseEntity = findCourseEntityById(userCourseDTO.getCourseId());
-        final Set<UserEntity> instructors = userService.findUserEntityByUserIds(Set.of(userCourseDTO.getUserId()));
+        final Set<UserEntity> instructors = userService.findUserEntitiesByUserIds(Set.of(userCourseDTO.getUserId()));
 
         final Set<UserEntity> coursePeople = courseEntity.getPeople();
 
@@ -103,24 +105,13 @@ public class CourseServiceImpl implements CourseService {
         return userService.findUserDtosByUserIds(studentIds);
     }
 
-
     @Override
     public CourseDTO addNewCourse(final CourseDTO courseDto) {
         final Set<LessonDTO> lessons = courseDto.getLessons();
-        if (Objects.isNull(lessons) || lessons.isEmpty() || lessons.size() < MIN_NUMBER_OF_LESSONS) {
-            log.error("Invalid lessons data");
-            throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
-        }
-
-        final Set<Long> instructorIds = courseDto.getInstructorIds();
-        if (Objects.isNull(instructorIds) || instructorIds.isEmpty()) {
-            log.error("Course cannot be created without any instructor assigned.");
-            throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
-
-        }
+        validateCourseCreation(courseDto, lessons);
 
         final CourseEntity courseEntity = modelMapper.map(courseDto, CourseEntity.class);
-        final Set<UserEntity> instructors = userService.findUserEntityByUserIds(instructorIds);
+        final Set<UserEntity> instructors = userService.findUserEntitiesByUserIds(courseDto.getInstructorIds());
         final Set<UserEntity> people = courseEntity.getPeople();
 
         if (Objects.isNull(people)) {
@@ -133,37 +124,51 @@ public class CourseServiceImpl implements CourseService {
         return courseDto;
     }
 
+    void validateCourseCreation(final CourseDTO courseDto,
+                                        final Set<LessonDTO> lessons) {
+        if (CollectionUtils.isEmpty(lessons) || lessons.size() < MIN_NUMBER_OF_LESSONS) {
+            log.error("Invalid lessons data");
+            throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
+        }
+
+        final Set<Long> instructorIds = courseDto.getInstructorIds();
+        if (Objects.isNull(instructorIds) || instructorIds.isEmpty()) {
+            log.error("Course cannot be created without any instructor assigned.");
+            throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
+        }
+    }
+
     @Override
     public RegisterUserToCourseDTO registerUserToCourse(final RegisterUserToCourseDTO userToCourseDTO) {
         final Long userId = userToCourseDTO.getUserId();
         final Long courseId = userToCourseDTO.getCourseId();
+        validateUserCourseRegistration(userId);
 
+        final CourseEntity courseEntity = findCourseEntityById(courseId);
+        final UserEntity userEntityByUserId = userService.findUserEntityByUserId(userId);
+        courseEntity.getPeople().add(userEntityByUserId);
+        courseRepository.save(courseEntity);
+
+        return userToCourseDTO;
+    }
+
+    void validateUserCourseRegistration(final Long userId) {
         final Set<CourseResDTO> coursesByUserId = getCoursesByUserId(userId);
-
         long numberOfActiveCoursesPerUser = coursesByUserId.stream()
                 .filter(course -> isLocalDateBetweenDatesIncludingLimits(course.getStartDate(), course.getEndDate()))
                 .count();
         if (numberOfActiveCoursesPerUser > NUMBER_OF_ACTIVE_COURSES_PER_USER) {
             log.error("User with id {} can not take more than {} courses simultaneously.", userId,  NUMBER_OF_ACTIVE_COURSES_PER_USER);
             throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
-
         }
 
         final Set<Long> activeCourseIdsPerUser = coursesByUserId.stream()
                 .map(CourseResDTO::getId)
                 .collect(Collectors.toSet());
-        if (activeCourseIdsPerUser.contains(courseId)) {
+        if (activeCourseIdsPerUser.contains(userId)) {
             log.error("User with id {} is already registered for the course.", userId);
             throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
 
         }
-
-        final CourseEntity courseEntity = findCourseEntityById(courseId);
-        final UserEntity userEntityByUserId = userService.findUserEntityByUserId(userId);
-        courseEntity.getPeople().add(userEntityByUserId);
-
-        courseRepository.save(courseEntity);
-
-        return userToCourseDTO;
     }
 }
