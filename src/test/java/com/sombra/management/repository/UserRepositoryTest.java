@@ -1,4 +1,4 @@
-package com.sombra.management.integration.repository;
+package com.sombra.management.repository;
 
 import com.sombra.management.entity.UserEntity;
 import com.sombra.management.repository.UserRepository;
