@@ -10,7 +10,7 @@ public interface UserService {
 
     UserEntity findUserEntityByUserId(final Long userId);
 
-    Set<UserEntity> findUserEntityByUserIds(final Set<Long> userIds);
+    Set<UserEntity> findUserEntitiesByUserIds(final Set<Long> userIds);
 
     UserNewRoleDTO assignNewRoleForUser(final UserNewRoleDTO userNewRoleDTO);
 

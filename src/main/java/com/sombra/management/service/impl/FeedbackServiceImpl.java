@@ -27,6 +27,12 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public StudentFeedbackDTO addFeedbackForCourseGraduation(final StudentFeedbackDTO studentFeedbackDTO) {
+        final var feedbackEntity = initializeFeedbackEntity(studentFeedbackDTO);
+        feedbackRepository.save(feedbackEntity);
+        return studentFeedbackDTO;
+    }
+
+    private FeedbackEntity initializeFeedbackEntity(final StudentFeedbackDTO studentFeedbackDTO) {
         final FeedbackEntity feedbackEntity = modelMapper.map(studentFeedbackDTO, FeedbackEntity.class);
         final CourseGraduationEntity courseGraduationEntity = courseGraduationService
                 .getCourseGraduationById(studentFeedbackDTO.getCourseGraduationId());
@@ -35,9 +41,6 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedbackEntity.setCourseGraduation(courseGraduationEntity);
         feedbackEntity.setDate(LocalDateTime.now());
         feedbackEntity.setInstructor(userEntity);
-
-        feedbackRepository.save(feedbackEntity);
-
-        return studentFeedbackDTO;
+        return feedbackEntity;
     }
 }
