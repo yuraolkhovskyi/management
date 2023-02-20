@@ -1,0 +1,10 @@
+rest:
+  base-url: http://localhost:8080
+  api:
+    authenticate: /api/auth/authenticate
+    register: /api/auth/register
+
+db:
+  url: jdbc:postgresql://localhost:5432/yuriiolkhovskiy
+  user: yuriiolkhovskiy
+  password: postgres

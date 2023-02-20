@@ -125,7 +125,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     void validateCourseCreation(final CourseDTO courseDto,
-                                        final Set<LessonDTO> lessons) {
+                                final Set<LessonDTO> lessons) {
         if (CollectionUtils.isEmpty(lessons) || lessons.size() < MIN_NUMBER_OF_LESSONS) {
             log.error("Invalid lessons data");
             throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
