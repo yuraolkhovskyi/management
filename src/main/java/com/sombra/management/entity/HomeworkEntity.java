@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "homeworks")
+@Table(name = "homeworks", schema = "management")
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeworkEntity {
@@ -29,7 +29,7 @@ public class HomeworkEntity {
     private LessonEntity lesson;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="student_id", nullable=false)
     private UserEntity student;
 
     @OneToOne(fetch = FetchType.LAZY)

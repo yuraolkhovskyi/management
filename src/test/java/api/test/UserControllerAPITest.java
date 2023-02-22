@@ -68,7 +68,7 @@ public class UserControllerAPITest {
 
     private static void deleteUser(final String email) {
         try (Connection connection = DBConfig.getDBConnection()) {
-            final String query = "DELETE FROM users WHERE email =  ?";
+            final String query = "DELETE FROM management.users WHERE email =  ?";
             final PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, email);
             statement.execute();

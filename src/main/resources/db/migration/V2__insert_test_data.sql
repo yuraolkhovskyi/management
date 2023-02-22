@@ -84,15 +84,15 @@ VALUES
 
 INSERT INTO files (id, file, file_name, file_type)
 VALUES
-    ('id1', null, 'file1.png', 'image/png'),
-    ('id2', null, 'file2.png', 'image/png'),
-    ('id3', null, 'file3.png', 'image/png');
+    ('f6a16ff7-4a31-11eb-be7b-8344edc8f33b', null, 'file1.png', 'image/png'),
+    ('f6a16ff7-4a31-11eb-be7b-8344edc8f34b', null, 'file2.png', 'image/png'),
+    ('f6a16ff7-4a31-11eb-be7b-8344edc8f36b', null, 'file3.png', 'image/png');
 
-INSERT INTO homeworks (id, upload_date, file_id, lesson_id, user_id)
+INSERT INTO homeworks (id, upload_date, file_id, lesson_id, student_id)
 VALUES
-    (1, '2023-05-02', 'id1', 1, 1),
-    (2, '2023-05-02', 'id2', 6, 4),
-    (3, '2023-05-02', 'id3', 11, 1);
+    (1, '2023-05-02', 'f6a16ff7-4a31-11eb-be7b-8344edc8f33b', 1, 1),
+    (2, '2023-05-02', 'f6a16ff7-4a31-11eb-be7b-8344edc8f34b', 6, 4),
+    (3, '2023-05-02', 'f6a16ff7-4a31-11eb-be7b-8344edc8f36b', 11, 1);
 
 INSERT INTO marks (id, date, mark, instructor_id, lesson_id, user_id)
 VALUES

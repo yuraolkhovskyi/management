@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @Setter
 @Entity
-@Table(name = "files")
+@Table(name = "files", schema = "management")
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileEntity {

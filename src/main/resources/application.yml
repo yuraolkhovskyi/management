@@ -1,20 +1,22 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/yuriiolkhovskiy
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
     database: postgresql
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: management
+    sql-migration-prefix: V
 user:
   max-number-of-courses: 5
 
 course:
   min-number-of-lessons: 5
-
 
 jwt:
   secret-key: 703273357638792F423F4528482B4D6251655468576D597133743677397A24432646294A404E635266556A586E327234753778214125442A472D4B6150645367

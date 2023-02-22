@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "feedbacks")
+@Table(name = "feedbacks", schema = "management")
 @AllArgsConstructor
 @NoArgsConstructor
 public class FeedbackEntity {

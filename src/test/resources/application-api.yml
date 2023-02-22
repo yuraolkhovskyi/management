@@ -5,6 +5,6 @@ rest:
     register: /api/auth/register
 
 db:
-  url: jdbc:postgresql://localhost:5432/yuriiolkhovskiy
+  url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
   user: yuriiolkhovskiy
-  password: postgres
+  password: 9HKdnB?->9ux[>>hKaNN#j0Y4)42
