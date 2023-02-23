@@ -147,6 +147,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>management</finalName>
 	</build>
 
 </project>
