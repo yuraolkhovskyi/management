@@ -41,7 +41,7 @@
 //        //delete created user to keep db cleaned
 //        deleteUser(createUserRequestDTO.getEmail());
 //    }
-//
+
 //    @Test
 //    void registerNewUserAPITest_userAlreadyExists() {
 //        //register new user
