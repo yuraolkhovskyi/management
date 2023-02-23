@@ -11,7 +11,7 @@
 	<groupId>com.sombra</groupId>
 	<artifactId>management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>management</name>
 	<description>Middle Java Project</description>
 	<properties>

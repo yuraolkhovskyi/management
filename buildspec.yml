@@ -10,6 +10,6 @@ phases:
       - echo Build completed successfully
 artifacts:
   files:
-    - target/management.war
+    - target/management.jar
   discard-paths: yes
 
