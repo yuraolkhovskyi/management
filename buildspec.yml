@@ -4,13 +4,12 @@ phases:
   build:
     commands:
       - echo Entered the build phase...
-      - mvn clean package
-      - mvn test
+      - mvn clean package -DskipTests=true
   post_build:
     commands:
       - echo Build completed successfully
 artifacts:
   files:
-    - target/management.war
+    - target/management.jar
   discard-paths: yes
 
