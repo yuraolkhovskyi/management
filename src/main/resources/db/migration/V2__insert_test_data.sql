@@ -102,3 +102,10 @@ VALUES
     (4, '2023-05-10', 4, 5, 4, 4);
 
 
+
+
+
+
+
+
+006710565418.dkr.ecr.eu-central-1.amazonaws.com/management
