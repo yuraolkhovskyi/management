@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping(value = "/health")
-public class TestRestController {
+public class HealthRestController {
 
     @GetMapping
     public String health() {
         log.info("The application is healthy");
-        return "healthy-test";
+        return "healthy";
     }
 
 
