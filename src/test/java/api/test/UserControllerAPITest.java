@@ -78,7 +78,7 @@ public class UserControllerAPITest {
     }
 
     private static RegisterRequest getCreateUserRequestDTO() {
-        return new RegisterRequest("fName", "lName", "testEmail", "somePass");
+        return new RegisterRequest("fName", "lName", "testEmail@gmail.com", "somePass");
     }
 
 }

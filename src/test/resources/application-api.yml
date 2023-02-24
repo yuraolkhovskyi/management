@@ -1,5 +1,5 @@
 rest:
-  base-url: http://localhost:8080
+  base-url: http://management-app.eu-central-1.elasticbeanstalk.com
   api:
     authenticate: /api/auth/authenticate
     register: /api/auth/register
