@@ -18,8 +18,8 @@ spring:
     sql-migration-prefix: V
 user:
   max-number-of-courses: 5
-server:
-  port: 5000
+#server:
+#  port: 5000
 course:
   min-number-of-lessons: 5
 
