@@ -1,8 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
-    username: yuriiolkhovskiy
-    password: ndkLlh):w3El9InZY?.(ROJKd6V-
+    url:
+#    url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
+    username:
+#    username: yuriiolkhovskiy
+    password:
+#    password: ndkLlh):w3El9InZY?.(ROJKd6V-
   jpa:
     hibernate:
       ddl-auto: none
