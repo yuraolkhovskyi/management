@@ -1,5 +1,5 @@
-spring:
-  datasource:
-    url:
-    username:
-    password:
+#spring:
+#  datasource:
+#    url:
+#    username:
+#    password:
