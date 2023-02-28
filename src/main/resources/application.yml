@@ -1,11 +1,8 @@
 spring:
   datasource:
     url:
-#    url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
     username:
-#    username: yuriiolkhovskiy
     password:
-#    password: ndkLlh):w3El9InZY?.(ROJKd6V-
   jpa:
     hibernate:
       ddl-auto: none
@@ -25,7 +22,7 @@ course:
   min-number-of-lessons: 5
 
 jwt:
-  secret-key: 703273357638792F423F4528482B4D6251655468576D597133743677397A24432646294A404E635266556A586E327234753778214125442A472D4B6150645367
+  secret-key:
   days-to-expire: 7
 
 
