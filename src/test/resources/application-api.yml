@@ -1,10 +1,10 @@
-#rest:
-#  base-url: http://management-app.eu-central-1.elasticbeanstalk.com
-#  api:
-#    authenticate: /api/auth/authenticate
-#    register: /api/auth/register
-#
-#db:
-#  url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
-#  user: yuriiolkhovskiy
-#  password: 9HKdnB?->9ux[>>hKaNN#j0Y4)42
+rest:
+  base-url: http://management-app.eu-central-1.elasticbeanstalk.com
+  api:
+    authenticate: /api/auth/authenticate
+    register: /api/auth/register
+
+db:
+  url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
+  user: yuriiolkhovskiy
+  password: ndkLlh):w3El9InZY?.(ROJKd6V-
