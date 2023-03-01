@@ -10,6 +10,7 @@ import com.sombra.management.security.dto.RegisterRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
@@ -19,6 +20,7 @@ import java.util.Objects;
 import static api.util.RestUtil.makePostCall;
 import static org.hamcrest.Matchers.notNullValue;
 
+@Tag("api")
 public class UserControllerAPITest {
 
     private static final ApiPropertyModel API_PROPERTY_MODEL = Objects.requireNonNull(TestProperty.PROPERTIES).getRest().getApi();
