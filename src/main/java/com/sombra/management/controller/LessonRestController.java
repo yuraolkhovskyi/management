@@ -18,7 +18,6 @@ public class LessonRestController {
 
     private final LessonService lessonService;
 
-    // FIXME: 30.01.2023 limit access to student
 //    [BUSINESS] The student should be able to see list of lessons per course with all related information;
     @GetMapping(value = "/course/{courseId}/lessons")
     public ResponseEntity<Set<LessonDTO>> getLessonsByCourseId(@PathVariable final Long courseId) {

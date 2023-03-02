@@ -37,7 +37,8 @@ public class CourseEntity {
     @JoinTable(
             name = "person_course",
             joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id")
+            inverseJoinColumns = @JoinColumn(name = "person_id"),
+            schema = "management"
     )
     private Set<UserEntity> people;
 
