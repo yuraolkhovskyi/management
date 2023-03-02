@@ -13,7 +13,7 @@ public class HealthRestController {
     @GetMapping
     public String health() {
         log.info("The application is healthy");
-        return "healthy-readme";
+        return "healthy-load-balancer";
     }
 
 
