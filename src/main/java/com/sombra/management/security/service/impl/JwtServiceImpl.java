@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.function.Function;
 
 import static java.util.concurrent.TimeUnit.DAYS;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class JwtServiceImpl implements JwtService {
@@ -81,6 +83,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Key getSignKey() {
+        log.info("Secret key is: {}", SECRET_KEY);
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
