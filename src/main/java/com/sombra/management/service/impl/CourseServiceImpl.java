@@ -12,6 +12,7 @@ import com.sombra.management.entity.enumeration.UserRole;
 import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.CourseRepository;
 import com.sombra.management.service.CourseService;
+import com.sombra.management.service.LessonService;
 import com.sombra.management.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,7 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private final LessonService lessonService;
 
     @Value(value = "${user.max-number-of-courses}")
     private Long NUMBER_OF_ACTIVE_COURSES_PER_USER;
@@ -44,10 +46,12 @@ public class CourseServiceImpl implements CourseService {
 
     public CourseServiceImpl(final CourseRepository courseRepository,
                              final UserService userService,
-                             final ModelMapper modelMapper) {
+                             final ModelMapper modelMapper,
+                             final LessonService lessonService) {
         this.courseRepository = courseRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.lessonService = lessonService;
     }
 
     @Override
@@ -121,6 +125,7 @@ public class CourseServiceImpl implements CourseService {
         }
 
         courseRepository.save(courseEntity);
+        lessonService.saveLessons(lessons, courseEntity);
         return courseDto;
     }
 

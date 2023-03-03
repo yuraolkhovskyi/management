@@ -1,6 +1,7 @@
 package com.sombra.management.service.impl;
 
 import com.sombra.management.dto.LessonDTO;
+import com.sombra.management.entity.CourseEntity;
 import com.sombra.management.entity.LessonEntity;
 import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.LessonRepository;
@@ -38,6 +39,18 @@ public class LessonServiceImpl implements LessonService {
                     log.error("No lesson entity found by id {}", lessonId);
                     throw new SystemException(BAD_REQUEST_ERROR_MESSAGE, BAD_REQUEST);
                 });
+    }
+
+
+    @Override
+    public Set<LessonDTO> saveLessons(final Set<LessonDTO> lessons, final CourseEntity courseEntity) {
+        for (final LessonDTO lesson : lessons) {
+            final LessonEntity lessonToSave = new LessonEntity();
+            lessonToSave.setTitle(lesson.getTitle());
+            lessonToSave.setCourse(courseEntity);
+            lesson.setId(lessonRepository.save(lessonToSave).getId());
+        }
+        return lessons;
     }
 
 
