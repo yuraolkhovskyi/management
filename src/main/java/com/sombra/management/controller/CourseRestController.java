@@ -7,11 +7,13 @@ import com.sombra.management.dto.RegisterUserToCourseDTO;
 import com.sombra.management.dto.UserCourseDTO;
 import com.sombra.management.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/course")
@@ -35,6 +37,7 @@ public class CourseRestController {
     //    [BUSINESS] Student can take up to 5 courses at the same time; | ADMIN / USER
     @PostMapping(value = "/register/user")
     public ResponseEntity<RegisterUserToCourseDTO> registerUserToCourse(@RequestBody final RegisterUserToCourseDTO userToCourseDTO) {
+        log.info("Course id: {}, userId: {}", userToCourseDTO.getCourseId(), userToCourseDTO.getUserId());
         return ResponseEntity.ok().body(courseService.registerUserToCourse(userToCourseDTO));
     }
 
