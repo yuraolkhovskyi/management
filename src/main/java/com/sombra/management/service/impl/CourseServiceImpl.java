@@ -54,7 +54,7 @@ public class CourseServiceImpl implements CourseService {
     public Set<CourseResDTO> getCoursesByUserId(final Long userId) {
         SecurityContext context = SecurityContextHolder.getContext();
         final UserEntity user = (UserEntity) context.getAuthentication().getPrincipal();
-        if (user.getRole() != UserRole.ADMIN || !Objects.equals(user.getId(), userId)) {
+        if (user.getRole() != UserRole.ADMIN && !Objects.equals(user.getId(), userId)) {
             throw new SystemException(ACCESS_DENIED_ERROR_MESSAGE, ACCESS_DENIED);
         }
         return courseRepository.getCourseEntitiesByUserId(userId).stream()
