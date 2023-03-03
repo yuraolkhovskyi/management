@@ -1,5 +1,5 @@
 rest:
-  base-url: http://management-app.eu-central-1.elasticbeanstalk.com
+  base-url: http://management-load-balancer-473381855.eu-central-1.elb.amazonaws.com
   api:
     authenticate: /api/auth/authenticate
     register: /api/auth/register

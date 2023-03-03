@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - mvn clean install -DskipTests=true
-#      - mvn test -Dtest=com.sombra.management.**
+      - mvn test -Dtest=com.sombra.management.**
       - echo Logging into Amazon ECR
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)

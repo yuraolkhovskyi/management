@@ -33,11 +33,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     private FeedbackEntity initializeFeedbackEntity(final StudentFeedbackDTO studentFeedbackDTO) {
-        final FeedbackEntity feedbackEntity = modelMapper.map(studentFeedbackDTO, FeedbackEntity.class);
         final CourseGraduationEntity courseGraduationEntity = courseGraduationService
                 .getCourseGraduationById(studentFeedbackDTO.getCourseGraduationId());
         final UserEntity userEntity = userService.findUserEntityByUserId(studentFeedbackDTO.getInstructorId());
 
+        final FeedbackEntity feedbackEntity = modelMapper.map(studentFeedbackDTO, FeedbackEntity.class);
         feedbackEntity.setCourseGraduation(courseGraduationEntity);
         feedbackEntity.setDate(LocalDateTime.now());
         feedbackEntity.setInstructor(userEntity);

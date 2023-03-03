@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.sombra.management.exception.ErrorMessageConstants.BAD_REQUEST_ERROR_MESSAGE;
 import static com.sombra.management.exception.code.ServiceErrorCode.BAD_REQUEST;
@@ -27,7 +28,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     private final ModelMapper modelMapper;
 
     @Override
-    public String storeFile(final MultipartFile homeworkFile) throws IOException {
+    public UUID storeFile(final MultipartFile homeworkFile) throws IOException {
         return store(homeworkFile).getId();
     }
 
@@ -37,7 +38,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     }
 
     @Override
-    public FileResDTO downloadFile(final String fileId) {
+    public FileResDTO downloadFile(final UUID fileId) {
         final FileEntity fileEntity = fileRepository.findById(fileId)
                 .orElseThrow(() -> {
                     log.error("File with id {} doesn't exist", fileId);

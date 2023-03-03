@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,7 +22,8 @@ public class FileEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @Column(name = "id", columnDefinition = "uuid")
+    private UUID id;
 
     @Column(name = "file_name")
     private String fileName;
@@ -26,8 +31,9 @@ public class FileEntity {
     @Column(name = "file_type")
     private String fileType;
 
+    @JdbcTypeCode(Types.LONGVARBINARY)
     @Lob
-    @Column(name = "file")
+    @Column(name = "file", columnDefinition = "bytea")
     private byte[] file;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "file", cascade = CascadeType.ALL)

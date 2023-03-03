@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -44,12 +45,12 @@ class FileStorageServiceImplTest {
         final byte[] file = new byte[]{};
         final MultipartFile multipartFile = new MockMultipartFile("test", file);
 
-        final String expectedId = "someId";
+        final UUID expectedId = UUID.randomUUID();
         final FileEntity fileEntity = new FileEntity(expectedId, "test", "test", null, null);
         when(fileRepository.save(any())).thenReturn(fileEntity);
 
         //when
-        final String actualId = underTest.storeFile(multipartFile);
+        final UUID actualId = underTest.storeFile(multipartFile);
 
         //then
         verify(fileRepository).save(any());
@@ -62,7 +63,7 @@ class FileStorageServiceImplTest {
         final byte[] file = new byte[]{};
         final MultipartFile multipartFile = new MockMultipartFile("test", file);
 
-        final String expectedId = "someId";
+        final UUID expectedId = UUID.randomUUID();
         final FileEntity fileEntity = new FileEntity(expectedId, "test", "test", null, null);
         when(fileRepository.save(any())).thenReturn(fileEntity);
 
@@ -79,9 +80,9 @@ class FileStorageServiceImplTest {
         //given
         final FileResDTO expected = new FileResDTO();
 
-        final String expectedId = "someId";
+        final UUID expectedId = UUID.randomUUID();
         final FileEntity fileEntity = new FileEntity(expectedId, "test", "test", null, null);
-        when(fileRepository.findById(anyString())).thenReturn(Optional.of(fileEntity));
+        when(fileRepository.findById(any())).thenReturn(Optional.of(fileEntity));
         when(modelMapper.map(any(), any())).thenReturn(expected);
 
         //when
@@ -95,7 +96,7 @@ class FileStorageServiceImplTest {
     @Test
     void downloadFile_test2() {
         Assertions.assertThrows(SystemException.class,
-                () -> underTest.downloadFile(anyString()));
+                () -> underTest.downloadFile(any()));
 
     }
 }
