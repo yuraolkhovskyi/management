@@ -9,6 +9,7 @@ import com.sombra.management.entity.UserEntity;
 import com.sombra.management.entity.enumeration.UserRole;
 import com.sombra.management.exception.SystemException;
 import com.sombra.management.repository.CourseRepository;
+import com.sombra.management.service.LessonService;
 import com.sombra.management.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,11 +44,14 @@ class CourseServiceImplTest {
     @Mock
     private ModelMapper modelMapper;
 
+    @Mock
+    private LessonService lessonService;
+
     private CourseServiceImpl underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new CourseServiceImpl(courseRepository, userService, modelMapper);
+        underTest = new CourseServiceImpl(courseRepository, userService, modelMapper, lessonService);
     }
 
 
