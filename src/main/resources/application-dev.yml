@@ -1,5 +1,5 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
-    username: yuriiolkhovskiy
-    password: T5{DTc(AKg&fBByg5?O55hJk-sAp
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://management.czxwyigcxgpl.eu-central-1.rds.amazonaws.com:5432/management
+#    username: yuriiolkhovskiy
+#    password: T5{DTc(AKg&fBByg5?O55hJk-sAp
