@@ -32,7 +32,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         return studentFeedbackDTO;
     }
 
-    private FeedbackEntity initializeFeedbackEntity(final StudentFeedbackDTO studentFeedbackDTO) {
+    FeedbackEntity initializeFeedbackEntity(final StudentFeedbackDTO studentFeedbackDTO) {
         final CourseGraduationEntity courseGraduationEntity = courseGraduationService
                 .getCourseGraduationById(studentFeedbackDTO.getCourseGraduationId());
         final UserEntity userEntity = userService.findUserEntityByUserId(studentFeedbackDTO.getInstructorId());
