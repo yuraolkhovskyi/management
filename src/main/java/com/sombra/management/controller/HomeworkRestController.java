@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/homework")
@@ -17,7 +19,7 @@ public class HomeworkRestController {
     private final HomeworkService homeworkService;
 
 //    [BUSINESS] The student should be able to upload a text file with homework;
-    @PostMapping(value = "/lesson/{lessonId}/user/{userId}")
+    @PostMapping(value = "/lesson/{lessonId}/user/{userId}", consumes = {MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<HomeworkResDTO> uploadHomework(
             @PathVariable final Long lessonId,
             @PathVariable final Long userId,

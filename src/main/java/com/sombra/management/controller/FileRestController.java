@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.UUID;
 
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/file")
@@ -22,7 +24,7 @@ public class FileRestController {
     private final FileStorageService fileStorageService;
 
 //    [BUSINESS] The student should be able to upload a text file with homework; | ADMIN / STUDENT
-    @PostMapping(value = "/upload")
+    @PostMapping(value = "/upload", consumes = {MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<UUID> uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         return ResponseEntity.ok().body(fileStorageService.storeFile(multipartFile));
     }
